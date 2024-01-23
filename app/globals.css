@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .toolbar {
+    @apply flex items-center justify-between bg-primary-black px-5 text-white fixed top-0 left-0 right-0 z-20 gap-4;
+  }
+
+  .toolbar-element {
+    @apply h-fit px-4 py-5 rounded-none;
+  }
+
+  .toolbar-btn {
+    @apply flex gap-1 rounded-sm border-none bg-primary-green px-2.5 py-2 font-bold text-primary-black focus:border-none min-w-24;
+  }
+
+  .no-ring {
+    @apply focus-visible:ring-offset-0 ring-offset-0 outline-none ring-0 focus:ring-0 focus:ring-offset-0 !important;
+  }
+
+  .input-ring {
+    @apply focus-visible:ring-offset-0 ring-offset-0 outline-none  focus:ring-primary-green focus:ring-1 focus:ring-offset-0 rounded-none  border-none bg-transparent h-8 !important;
+  }
+
+  .shapes_menu-content {
+    @apply mt-3 flex flex-col gap-y-1 border-none bg-primary-black py-4 text-white;
+  }
+
+  .shapes_menu-item {
+    @apply flex h-fit rounded-none justify-between gap-10 focus:border-none px-5 py-3;
+  }
+}

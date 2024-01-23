@@ -54,8 +54,8 @@ export const FigmaProvider = ({ children }) => {
   });
 
   const initializaFabricCanvas = useCallback(() => {
-    const designPanel = document.getElementById("design").offsetWidth;
-    const layerPanel = document.getElementById("layers").offsetWidth;
+    const designPanel = document.getElementById("design")?.offsetWidth;
+    const layerPanel = document.getElementById("layers")?.offsetWidth;
 
     const canvas = new fabric.Canvas(canvasRef.current, {
       width: window.innerWidth - (designPanel + layerPanel),

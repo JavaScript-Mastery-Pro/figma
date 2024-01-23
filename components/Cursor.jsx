@@ -1,11 +1,12 @@
+import { useEffect, useRef } from "react";
+
 import { useLive } from "@/context/LiveProvider";
-import React from "react";
 
 const Cursor = ({ x, y, color, message, type }) => {
+  const timeoutRef = useRef(null);
   const { myPresence, cursorState, setCursorState, updateMyPresence } =
     useLive();
 
-  let timeout = null;
   const handleUpdate = (e) => {
     updateMyPresence({ message: e.target.value });
     setCursorState({
@@ -14,22 +15,33 @@ const Cursor = ({ x, y, color, message, type }) => {
       message: e.target.value,
     });
 
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      setCursorState({
-        mode: "hidden",
-      });
-      updateMyPresence({ message: "" });
-    }, 10000);
+    clearTimeout(timeoutRef.current);
   };
+
+  useEffect(() => {
+    if (cursorState.mode === "chat" && cursorState.message) {
+      timeoutRef.current = setTimeout(() => {
+        setCursorState({
+          mode: "hidden",
+        });
+        updateMyPresence({ message: null });
+      }, 10000);
+    }
+
+    return () => {
+      clearTimeout(timeoutRef.current);
+    };
+  }, [cursorState.message]);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       setCursorState({
         mode: "chat",
         previousMessage: cursorState.message,
-        message: "",
+        message: e.target.value,
       });
+
+      clearTimeout(timeoutRef.current);
     } else if (e.key === "Escape") {
       setCursorState({
         mode: "hidden",

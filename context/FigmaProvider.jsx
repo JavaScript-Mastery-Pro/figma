@@ -236,6 +236,21 @@ export const FigmaProvider = ({ children }) => {
     }
   };
 
+  const handleZoom = (options, canvas) => {
+    let delta = options.e.deltaY;
+
+    let zoom = canvas.getZoom();
+    zoom *= 0.999 ** delta;
+
+    if (zoom > 20) zoom = 20;
+    if (zoom < 0.01) zoom = 0.01;
+
+    canvas.setZoom(zoom);
+
+    options.e.preventDefault();
+    options.e.stopPropagation();
+  };
+
   // Register fabricjs and keyboard events
   useEffect(() => {
     const canvas = initializaFabricCanvas();
@@ -246,6 +261,7 @@ export const FigmaProvider = ({ children }) => {
     canvas.on("object:modified", (e) => handleCanvasObjectModified(e));
     canvas.on("path:created", (e) => handleCanvasPathCreated(e));
     canvas.on("selection:created", (e) => handleSelectionCreated(e));
+    canvas.on("mouse:wheel", (e) => handleZoom(e, canvas));
 
     window.addEventListener("keydown", (e) =>
       handleKeyDown(e, canvas, undo, redo, deleteShapeFromStorage)

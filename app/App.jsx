@@ -2,6 +2,7 @@
 
 import Cursor from "@/components/Cursor";
 import Layers from "@/components/Layers";
+import OverlayComments from "@/components/OverlayComments";
 import Toolbar from "@/components/Toolbar";
 import Design from "@/components/design/index";
 
@@ -46,6 +47,8 @@ function Home() {
         <canvas ref={canvasRef} />
         <Design />
       </section>
+
+      <OverlayComments />
     </main>
   );
 }

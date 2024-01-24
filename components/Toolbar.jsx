@@ -5,11 +5,12 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import ShapesMenu from "./ShapesMenu";
 
+import ActiveUsers from "./ActiveUsers";
 import { toolbarButtons } from "@/constants";
 import { useFigma } from "@/context/FigmaProvider";
 
 const Toolbar = () => {
-  const { handleElementSelect, activeElement, setActiveElement } = useFigma();
+  const { handleElementSelect, activeElement } = useFigma();
 
   return (
     <section className="toolbar">
@@ -41,7 +42,7 @@ const Toolbar = () => {
         )}
       </div>
 
-      <Button className="toolbar-btn" onClick={() => setActiveElement("reset")}>
+      {/* <Button className="toolbar-btn" onClick={() => setActiveElement("reset")}>
         <Image
           src={"/assets/new-file.svg"}
           alt="New File"
@@ -49,7 +50,9 @@ const Toolbar = () => {
           height={12}
         />
         <p className="text-xs">New File</p>
-      </Button>
+      </Button> */}
+
+      <ActiveUsers />
     </section>
   );
 };

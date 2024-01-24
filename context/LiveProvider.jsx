@@ -1,6 +1,5 @@
 "use client";
 
-import { v4 as uuidv4 } from "uuid";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 import {
@@ -10,6 +9,7 @@ import {
   useRedo,
   useOthers,
   useMyPresence,
+  useSelf,
 } from "@/liveblocks.config";
 import { CURSOR_COLORS } from "@/constants";
 
@@ -19,6 +19,7 @@ export const LiveProvider = ({ children }) => {
   const undo = useUndo();
   const redo = useRedo();
   const others = useOthers();
+  const currentUser = useSelf();
 
   const [myPresence, updateMyPresence] = useMyPresence();
   const [cursorState, setCursorState] = useState({
@@ -101,6 +102,7 @@ export const LiveProvider = ({ children }) => {
         others,
         undo,
         redo,
+        currentUser,
         myPresence,
         cursorState,
         canvasObjects,

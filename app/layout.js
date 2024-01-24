@@ -5,6 +5,7 @@ import { FigmaProvider } from "@/context/FigmaProvider";
 import "./globals.css";
 import { Room } from "@/context/RoomProvider";
 import { LiveProvider } from "@/context/LiveProvider";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const metadata = {
   title: "Figma Clone",
@@ -26,7 +27,9 @@ export default function RootLayout({ children }) {
       >
         <Room>
           <LiveProvider>
-            <FigmaProvider>{children}</FigmaProvider>
+            <TooltipProvider>
+              <FigmaProvider>{children}</FigmaProvider>
+            </TooltipProvider>
           </LiveProvider>
         </Room>
       </body>

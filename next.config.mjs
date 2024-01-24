@@ -9,6 +9,9 @@ const nextConfig = {
     // config.infrastructureLogging = { debug: /PackFileCache/ };
     return config;
   },
+  images: {
+    domains: ["liveblocks.io"],
+  },
 };
 
 export default nextConfig;

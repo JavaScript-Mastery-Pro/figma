@@ -3,7 +3,6 @@
 import { useThreads } from "@/liveblocks.config";
 import { Composer, Thread } from "@liveblocks/react-comments";
 
-import React, { memo } from "react";
 import "@liveblocks/react-comments/styles.css";
 
 const OverlayComments = () => {
@@ -14,6 +13,7 @@ const OverlayComments = () => {
       {threads.map((thread) => (
         <Thread key={thread.id} thread={thread} />
       ))}
+
       <Composer />
     </div>
   );

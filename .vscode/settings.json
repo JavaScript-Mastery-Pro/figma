@@ -5,6 +5,7 @@
     "source.fixAll.eslint": "always",
     "source.addMissingImports": "always"
   },
+  "prettier.printWidth": 85,
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },

@@ -23,6 +23,8 @@ import { useFigma } from "@/context/FigmaProvider";
 import { useRef } from "react";
 import { exportToPDF } from "@/lib/utils";
 
+// TODO: This is a huge file. Maybe we can split it into parts: Text, Color, Alignment, Group, Dimensions, etc. And then provide those files, and then simply import them here.
+// TODO: Rename as RightSidebar
 const Design = () => {
   const { elementAttributes, setElementAttributes } = useFigma();
 
@@ -38,6 +40,7 @@ const Design = () => {
         Design
       </h3>
 
+      {/* //TODO Needs to be fixed or removed */}
       {/* alignment */}
       <div className="flex border-b border-primary-grey-200 p-3">
         {alignmentOptions.map((option) => (
@@ -63,6 +66,7 @@ const Design = () => {
         ))}
       </div>
 
+      {/* //TODO Needs to be fixed or removed */}
       {/* grouping */}
       <section className="flex flex-col border-b border-primary-grey-200 py-3">
         <h3 className=" p-3 text-[10px] uppercase">Grouping</h3>
@@ -124,6 +128,7 @@ const Design = () => {
             />
           </div>
         </div>
+        {/* // TODO:  Remove radius */}
         <div className="flex justify-around  p-1">
           <div className="flex w-24 items-center gap-2 rounded-sm">
             <Label htmlFor="width">R</Label>

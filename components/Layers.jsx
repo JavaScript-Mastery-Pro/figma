@@ -4,6 +4,8 @@ import Image from "next/image";
 
 import { layersData } from "@/constants";
 
+// TODO: Rename as LeftSidebar
+// TODO: Turn it into elements instead of layers
 const Layers = () => {
   return (
     <div

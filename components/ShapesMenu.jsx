@@ -74,11 +74,7 @@ function ShapesMenu({ item }) {
         ref={imageInputRef}
         accept="image/*"
         onChange={(e) => {
-          handleImageUpload(
-            e.target.files[0],
-            fabricCanvasRef,
-            syncShapeInStorage
-          );
+          handleImageUpload(e.target.files[0], fabricCanvasRef, syncShapeInStorage);
         }}
       />
     </>

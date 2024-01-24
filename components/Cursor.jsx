@@ -3,12 +3,12 @@ import { useEffect, useRef } from "react";
 import { useLive } from "@/context/LiveProvider";
 
 const Cursor = ({ x, y, color, message, type }) => {
+  const { myPresence, cursorState, setCursorState, updateMyPresence } = useLive();
   const timeoutRef = useRef(null);
-  const { myPresence, cursorState, setCursorState, updateMyPresence } =
-    useLive();
 
   const handleUpdate = (e) => {
     updateMyPresence({ message: e.target.value });
+
     setCursorState({
       mode: "chat",
       previousMessage: null,
@@ -21,9 +21,7 @@ const Cursor = ({ x, y, color, message, type }) => {
   useEffect(() => {
     if (cursorState.mode === "chat" && cursorState.message) {
       timeoutRef.current = setTimeout(() => {
-        setCursorState({
-          mode: "hidden",
-        });
+        setCursorState({ mode: "hidden" });
         updateMyPresence({ message: null });
       }, 10000);
     }
@@ -31,7 +29,7 @@ const Cursor = ({ x, y, color, message, type }) => {
     return () => {
       clearTimeout(timeoutRef.current);
     };
-  }, [cursorState.message]);
+  }, [cursorState, setCursorState, updateMyPresence]);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -52,10 +50,9 @@ const Cursor = ({ x, y, color, message, type }) => {
   return (
     <div
       className="pointer-events-none absolute left-0 top-0 z-50"
-      style={{
-        transform: `translateX(${x}px) translateY(${y}px)`,
-      }}
+      style={{ transform: `translateX(${x}px) translateY(${y}px)` }}
     >
+      {/* //TODO Can be extracted somewhere and provided. We can figure something out to do with hte color.  */}
       {type !== "user" && (
         <svg
           className="relative"
@@ -73,27 +70,24 @@ const Cursor = ({ x, y, color, message, type }) => {
         </svg>
       )}
 
-      {cursorState?.mode === "chat" &&
-        type === "user" &&
-        myPresence.cursor !== null && (
-          <div
-            className="absolute left-2 top-5 bg-blue-500 px-4 py-2 text-sm leading-relaxed text-white rounded-2xl"
-            onKeyUp={(e) => e.stopPropagation()}
-          >
-            {cursorState.previousMessage && (
-              <div>{cursorState.previousMessage}</div>
-            )}
-            <input
-              className="w-60 border-none	bg-transparent text-white outline-none placeholder:text-blue-300"
-              autoFocus={true}
-              onChange={handleUpdate}
-              onKeyDown={handleKeyDown}
-              placeholder={cursorState.previousMessage ? "" : "Say something…"}
-              value={cursorState.message || ""}
-              maxLength={50}
-            />
-          </div>
-        )}
+      {cursorState?.mode === "chat" && type === "user" && myPresence.cursor && (
+        <div
+          className="absolute left-2 top-5 bg-blue-500 px-4 py-2 text-sm leading-relaxed text-white rounded-2xl"
+          onKeyUp={(e) => e.stopPropagation()}
+        >
+          {cursorState.previousMessage && <div>{cursorState.previousMessage}</div>}
+
+          <input
+            className="w-60 border-none	bg-transparent text-white outline-none placeholder:text-blue-300"
+            autoFocus={true}
+            onChange={handleUpdate}
+            onKeyDown={handleKeyDown}
+            placeholder={cursorState.previousMessage ? "" : "Say something…"}
+            value={cursorState.message || ""}
+            maxLength={50}
+          />
+        </div>
+      )}
 
       {message && (
         <div

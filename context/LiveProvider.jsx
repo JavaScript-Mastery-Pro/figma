@@ -30,13 +30,10 @@ export const LiveProvider = ({ children }) => {
 
   const canvasObjects = useStorage((root) => root.canvasObjects);
 
-  const updateShapeInStorage = useMutation(
-    ({ storage }, shapeId, shapeData) => {
-      const canvasObjects = storage.get("canvasObjects");
-      canvasObjects.set(shapeId, shapeData);
-    },
-    []
-  );
+  const updateShapeInStorage = useMutation(({ storage }, shapeId, shapeData) => {
+    const canvasObjects = storage.get("canvasObjects");
+    canvasObjects.set(shapeId, shapeData);
+  }, []);
 
   const deleteShapeFromStorage = useMutation(({ storage }, shapeId) => {
     const canvasObjects = storage.get("canvasObjects");

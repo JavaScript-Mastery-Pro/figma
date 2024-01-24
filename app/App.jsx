@@ -9,10 +9,9 @@ import Design from "@/components/design/index";
 import { useFigma } from "@/context/FigmaProvider";
 import { useLive } from "@/context/LiveProvider";
 
-function Home() {
+const Home = () => {
   const { canvasRef } = useFigma();
-  const { others, myPresence, handlePointerMove, handlePointerLeave } =
-    useLive();
+  const { others, myPresence, handlePointerMove, handlePointerLeave } = useLive();
 
   return (
     <main
@@ -30,7 +29,7 @@ function Home() {
       />
 
       {others
-        .filter((other) => other.presence.cursor !== null)
+        .filter((other) => other.presence.cursor)
         .map(({ connectionId, presence }) => (
           <Cursor
             key={connectionId}
@@ -42,6 +41,7 @@ function Home() {
         ))}
 
       <Toolbar />
+
       <section className="flex justify-between">
         <Layers />
         <canvas ref={canvasRef} />
@@ -51,6 +51,6 @@ function Home() {
       <OverlayComments />
     </main>
   );
-}
+};
 
 export default Home;

@@ -7,7 +7,8 @@ import { generateRandomName } from "@/lib/utils";
 import { useLive } from "@/context/LiveProvider";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
-export function Avatar({ name, otherStyles }) {
+//TODO */ Can be extracted somewhere and provided.
+const Avatar = ({ name, otherStyles }) => {
   return (
     <>
       <Tooltip>
@@ -32,9 +33,9 @@ export function Avatar({ name, otherStyles }) {
       </Tooltip>
     </>
   );
-}
+};
 
-function ActiveUsers() {
+const ActiveUsers = () => {
   const { others, currentUser } = useLive();
 
   const memoizedUsers = useMemo(() => {
@@ -45,6 +46,7 @@ function ActiveUsers() {
         {currentUser && (
           <Avatar name="You" otherStyles="border-[3px] border-primary-green" />
         )}
+
         {others.slice(0, 2).map(({ connectionId }) => (
           <Avatar
             key={connectionId}
@@ -60,9 +62,9 @@ function ActiveUsers() {
         )}
       </div>
     );
-  }, [others.length]);
+  }, [others, currentUser]);
 
   return memoizedUsers;
-}
+};
 
 export default ActiveUsers;

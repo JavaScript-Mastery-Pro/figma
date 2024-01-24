@@ -9,6 +9,7 @@ import ActiveUsers from "./ActiveUsers";
 import { toolbarButtons } from "@/constants";
 import { useFigma } from "@/context/FigmaProvider";
 
+// TODO: Rename to Navbar
 const Toolbar = () => {
   const { handleElementSelect, activeElement } = useFigma();
 
